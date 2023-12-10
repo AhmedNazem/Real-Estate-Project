@@ -16,6 +16,16 @@ mongoose
   });
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
+//!creating a middleware(error handler )    action in postman or insomnia
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  const message = err.message || "internal server error😗";
+  return res.status(statusCode).json({
+    succsess: false,
+    statusCode,
+    message,
+  });
+});
 //
 //
 app.listen(3000, () => {
